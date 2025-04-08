@@ -27,12 +27,7 @@ class BinaryTreeSet(Generic[KT, VT]):
         self.right = right
 
     def is_empty(self) -> bool:
-        return (
-            self.key is None and
-            self.value is None and
-            self.left is None and
-            self.right is None
-        )
+        return self.root is None
 
     def __eq__(self, other):
         if not isinstance(other, BinaryTreeSet):
