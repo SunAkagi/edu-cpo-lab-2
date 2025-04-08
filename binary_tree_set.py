@@ -154,16 +154,14 @@ def intersection(
 
 def map_set(
     tree: BinaryTreeSet[KT, VT],
-    f: Callable[[KT, VT],
-    Tuple[KT2, VT2]]
+    f: Callable[[KT, VT], Tuple[KT2, VT2]]
 ) -> BinaryTreeSet[KT2, VT2]:
     return from_list([f(k, v) for (k, v) in to_list(tree)])
 
 
 def filter_set(
     tree: BinaryTreeSet[KT, VT],
-    predicate: Callable[[KT, VT],
-    bool]
+    predicate: Callable[[KT, VT], bool]
 ) -> BinaryTreeSet[KT, VT]:
     return from_list([(k, v) for (k, v) in to_list(tree) if predicate(k, v)])
 
