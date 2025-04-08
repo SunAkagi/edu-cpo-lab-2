@@ -53,7 +53,7 @@ def test_api():
     f1 = filter_set(l1, lambda k, v: v is not None)
     assert to_list(f1) == [(2, 1)]
     assert length(f1) == 1
-    assert not member((1， None), f1)
+    assert not member((1, None), f1)
     assert member((2, 1), f1)
 
     f2 = filter_set(l1, lambda k, v: False)
