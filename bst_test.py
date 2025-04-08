@@ -19,8 +19,8 @@ def test_api():
     assert length(l1) == 2
     assert length(l2) == 2
 
-    assert str(remove(l1, (1, None)) == "{2: 1}"
-    assert str(remove(l1, (2, 1)) == "{1: None}"
+    assert str(remove(l1, (1, None))) == "{2: 1}"
+    assert str(remove(l1, (2, 1))) == "{1: None}"
 
     assert not member((1, None), empty_tree)
     assert member((1, None), l1)
@@ -62,7 +62,7 @@ def test_api():
 
     m1 = map_set(l1, lambda k, v: (k, str(v) + "_val"))
     vals = [v for v, _ in to_list(m1)]
-    assert "None_val" in vals and "1_key" in keys
+    assert "None_val" in vals and "1_val" in vals
     assert length(m1) == 2
 
     r = reduce_set(l1, lambda kv, acc: acc + [kv[1]], [])
