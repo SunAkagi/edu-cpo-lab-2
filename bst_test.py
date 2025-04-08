@@ -62,7 +62,7 @@ def test_api():
     assert length(f2) == 0
 
     m1 = map_set(l1, lambda k, v: (k, str(v) + "_val"))
-    vals = [v for v, _ in to_list(m1)]
+    vals = [v for _, v in to_list(m1)]
     assert "None_val" in vals and "1_val" in vals
     assert length(m1) == 2
 
