@@ -1,7 +1,8 @@
 import itertools
 
-from binary_tree_set import BinaryTreeSet, concat, cons, from_list, intersection, length, \
-    member, remove, to_list, empty, map_set, filter_set, reduce_set
+from binary_tree_set import BinaryTreeSet, concat, cons, from_list, \
+intersection, length, member, remove, to_list, empty, map_set, \
+filter_set, reduce_set
 
 
 def test_api():
@@ -30,9 +31,15 @@ def test_api():
     assert intersection(l1, l2) == l1
     assert intersection(l1, l2) == l2
     assert intersection(l1, empty_tree) == empty_tree
-    assert intersection(l1, cons((1, None), empty_tree)) == cons((1, None), empty_tree)
+    assert intersection(
+        l1,
+        cons((1, None), empty_tree)
+    ) == cons((1, None), empty_tree)
 
-    assert to_list(l1) == [(1, None), (2, 1)] or to_list(l1) == [(2, 1), (1, None)]
+    assert (
+        to_list(l1) == [(1, None), (2, 1)] or
+        to_list(l1) == [(2, 1), (1, None)]
+    )
     assert l1 == from_list([(1, None), (2, 1)])
     assert l1 == from_list([(2, 1), (1, None), (2, 1)])
     assert concat(l1, l2) == from_list([(1, None), (2, 1), (2, 1), (1, None)])
