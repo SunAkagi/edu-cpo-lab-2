@@ -26,14 +26,6 @@ class BinaryTreeSet(Generic[KT, VT]):
         self.left = left
         self.right = right
 
-    def is_empty(self) -> bool:
-        return (
-            self.key is None and
-            self.value is None and
-            self.left is None and
-            self.right is None
-        )
-
     def __eq__(self, other):
         if not isinstance(other, BinaryTreeSet):
             return False
@@ -58,12 +50,16 @@ def empty() -> BinaryTreeSet[KT, VT]:
     return BinaryTreeSet(None, None)
 
 
+def is_empty(tree: Optional[BinaryTreeSet[KT, VT]]) -> bool:
+    return tree is None
+
+
 def cons(
     pair: Tuple[KT, VT],
     tree: BinaryTreeSet[KT, VT]
 ) -> BinaryTreeSet[KT, VT]:
     k, v = pair
-    if tree.is_empty():
+    if is_empty(tree):
         return BinaryTreeSet(k, v)
     if k == tree.key:
         return BinaryTreeSet(k, v, tree.left, tree.right)
@@ -93,7 +89,7 @@ def from_list(pairs: List[Tuple[KT, VT]]) -> BinaryTreeSet[KT, VT]:
 def to_list(
     tree: BinaryTreeSet[KT, VT]
 ) -> List[Tuple[KT, VT]]:
-    if tree.is_empty():
+    if is_empty(tree):
         return []
     return (
         to_list(tree.left or empty()) +
@@ -103,7 +99,7 @@ def to_list(
 
 
 def member(k: KT, tree: BinaryTreeSet[KT, VT]) -> bool:
-    if tree.is_empty():
+    if is_empty(tree):
         return False
     if k == tree.key:
         return True
@@ -117,14 +113,14 @@ def length(tree: BinaryTreeSet[KT, VT]) -> int:
     return len(to_list(tree))
 
 
-def remove(tree: BinaryTreeSet[KT, VT], k: KT) -> BinaryTreeSet[KT, VT]:
-    if tree.is_empty():
+def remove(tree: Optional[BinaryTreeSet[KT, VT]], k: KT) -> Optional[BinaryTreeSet[KT, VT]]:
+    if is_empty(tree):
         return tree
     if k < tree.key:
         return BinaryTreeSet(
             tree.key,
             tree.value,
-            remove(tree.left or empty(), k),
+            remove(tree.left, k),
             tree.right
         )
     elif k > tree.key:
@@ -132,10 +128,10 @@ def remove(tree: BinaryTreeSet[KT, VT], k: KT) -> BinaryTreeSet[KT, VT]:
             tree.key,
             tree.value,
             tree.left,
-            remove(tree.right or empty(), k)
+            remove(tree.right, k)
         )
     else:
-        if tree.left and not tree.left.is_empty():
+        if tree.left and not is_empty(tree.left):
             max_kv = to_list(tree.left)[-1]
             return BinaryTreeSet(
                 max_kv[0], max_kv[1], remove(tree.left, max_kv[0]), tree.right
@@ -143,7 +139,7 @@ def remove(tree: BinaryTreeSet[KT, VT], k: KT) -> BinaryTreeSet[KT, VT]:
         elif tree.right:
             return tree.right
         else:
-            return empty()
+            return None
 
 
 def concat(
