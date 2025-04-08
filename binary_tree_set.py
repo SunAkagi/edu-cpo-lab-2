@@ -16,8 +16,8 @@ VT2 = TypeVar("VT2")
 class BinaryTreeSet(Generic[KT, VT]):
     def __init__(
         self,
-        key: Optional[KT] = None,
-        value: Optional[VT] = None,
+        key: KT,
+        value: VT,
         left: Optional['BinaryTreeSet[KT, VT]'] = None,
         right: Optional['BinaryTreeSet[KT, VT]'] = None
     ):
