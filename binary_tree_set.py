@@ -50,8 +50,6 @@ def empty() -> BinaryTreeSet[KT, VT]:
 def cons(pair: Tuple[KT, VT], tree: BinaryTreeSet[KT, VT]) -> BinaryTreeSet[KT, VT]:
     k, v = pair
     if tree.is_empty():
-        if k is None:
-            return BinaryTreeSet(k, v)
         return BinaryTreeSet(k, v)
     if k == tree.key:
         return BinaryTreeSet(k, v, tree.left, tree.right)
