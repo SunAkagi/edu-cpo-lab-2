@@ -1,8 +1,8 @@
 import itertools
 
 from binary_tree_set import BinaryTreeSet, concat, cons, from_list, \
-intersection, length, member, remove, to_list, empty, map_set, \
-filter_set, reduce_set
+    intersection, length, member, remove, to_list, empty, map_set, \
+    filter_set, reduce_set
 
 
 def test_api():
