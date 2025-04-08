@@ -2,6 +2,7 @@ from typing import Generic, Optional, TypeVar, Callable, List, Tuple
 from typing import Protocol, Any, cast
 from functools import reduce as functools_reduce
 
+
 class SupportsLessThan(Protocol):
     def __lt__(self, other: Any) -> bool: ...
 
@@ -89,7 +90,9 @@ def from_list(pairs: List[Tuple[KT, VT]]) -> BinaryTreeSet[KT, VT]:
     return tree
 
 
-def to_list(tree: BinaryTreeSet[KT, VT]) -> List[Tuple[Optional[KT], Optional[VT]]]:
+def to_list(
+    tree: BinaryTreeSet[KT, VT]
+) -> List[Tuple[Optional[KT], Optional[VT]]]:
     if tree.is_empty():
         return []
     return (
