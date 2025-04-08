@@ -31,7 +31,7 @@ class BinaryTreeSet(Generic[KT, VT]):
                 self.value is None and
                 self.left is None and
                 self.right is None
-               )
+        )
 
     def __eq__(self, other):
         if not isinstance(other, BinaryTreeSet):
