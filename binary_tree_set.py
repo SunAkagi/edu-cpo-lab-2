@@ -9,7 +9,7 @@ class SupportsLessThan(Protocol):
 
 KT = TypeVar("KT", bound=SupportsLessThan)
 VT = TypeVar("VT")
-KT2 = TypeVar("KT2")
+KT2 = TypeVar("KT2", bound=SupportsLessThan)
 VT2 = TypeVar("VT2")
 
 
@@ -55,7 +55,7 @@ class BinaryTreeSet(Generic[KT, VT]):
 
 
 def empty() -> BinaryTreeSet[KT, VT]:
-    return BinaryTreeSet(None, None)
+    return BinaryTreeSet(KT(), VT())
 
 
 def cons(
