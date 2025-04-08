@@ -66,8 +66,8 @@ def test_api():
     assert "None_val" in vals and "1_val" in vals
     assert length(m1) == 2
 
-    r = reduce_set(l1, lambda kv, acc: acc + [kv[1]], [])
-    assert sorted(r) == sorted([None, 1])
+    r = reduce_set(l1, lambda kv, acc: acc + [kv[0]], [])
+    assert sorted(r) == sorted([1, 2])
 
     e1 = empty()
     assert str(e1) == "{}"
