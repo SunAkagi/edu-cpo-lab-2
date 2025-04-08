@@ -90,8 +90,8 @@ def from_list(pairs: List[Tuple[KT, VT]]) -> BinaryTreeSet[KT, VT]:
 
 
 def to_list(
-    tree: BinaryTreeSet[Tuple[KT, VT]]
-) -> List[KT, VT]:
+    tree: BinaryTreeSet[KT, VT]
+) -> List[Tuple[KT, VT]]:
     if tree.is_empty():
         return []
     return (
