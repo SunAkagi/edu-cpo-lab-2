@@ -54,7 +54,7 @@ class BinaryTreeSet(Generic[KT, VT]):
 
 
 def empty() -> BinaryTreeSet[KT, VT]:
-    return BinaryTreeSet(KT = None, VT = None)
+    return BinaryTreeSet(None, None)
 
 
 def cons(
