@@ -54,8 +54,8 @@ class BinaryTreeSet(Generic[KT, VT]):
             yield from self.right
 
 
-def empty() -> Optional[BinaryTreeSet[KT, VT]]:
-    return None
+def empty() -> BinaryTreeSet[KT, VT]:
+    return BinaryTreeSet(None, None)
 
 
 def cons(
