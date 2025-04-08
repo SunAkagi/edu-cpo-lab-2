@@ -1,7 +1,12 @@
 from typing import Generic, Optional, TypeVar, Callable, List, Tuple
+from typing import Protocol, Any, cast
 from functools import reduce as functools_reduce
 
-KT = TypeVar("KT")
+class SupportsLessThan(Protocol):
+    def __lt__(self, other: Any) -> bool: ...
+
+
+KT = TypeVar("KT", bound=SupportsLessThan)
 VT = TypeVar("VT")
 KT2 = TypeVar("KT2")
 VT2 = TypeVar("VT2")
@@ -78,13 +83,13 @@ def cons(
 
 
 def from_list(pairs: List[Tuple[KT, VT]]) -> BinaryTreeSet[KT, VT]:
-    tree = empty()
+    tree: BinaryTreeSet[KT, VT] = empty()
     for k, v in pairs:
         tree = cons((k, v), tree)
     return tree
 
 
-def to_list(tree: BinaryTreeSet[KT, VT]) -> List[Tuple[KT, VT]]:
+def to_list(tree: BinaryTreeSet[KT, VT]) -> List[Tuple[Optional[KT], Optional[VT]]]:
     if tree.is_empty():
         return []
     return (
