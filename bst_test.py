@@ -6,7 +6,7 @@ from binary_tree_set import BinaryTreeSet, concat, cons, from_list, intersection
 
 def test_api():
     empty_tree = empty()
-    assert str(cons((None, None), empty_tree)) == "{None: None}"
+    assert str(cons((1, None), empty_tree)) == "{1: None}"
     l1 = cons((None, None), cons((1, None), empty_tree))
     l2 = cons((1, None), cons((None, None), empty_tree))
     assert str(empty_tree) == "{}"
