@@ -27,7 +27,11 @@ class BinaryTreeSet(Generic[KT, VT]):
         self.right = right
 
     def is_empty(self) -> bool:
-        return self.root is None
+        return (self.key is None and
+                self.value is None and
+                self.left is None and
+                self.right is None
+               )
 
     def __eq__(self, other):
         if not isinstance(other, BinaryTreeSet):
@@ -50,7 +54,7 @@ class BinaryTreeSet(Generic[KT, VT]):
 
 
 def empty() -> BinaryTreeSet[KT, VT]:
-    return BinaryTreeSet()
+    return BinaryTreeSet(Optional[KT] = None, Optional[VT] = None)
 
 
 def cons(
@@ -87,7 +91,7 @@ def from_list(pairs: List[Tuple[KT, VT]]) -> BinaryTreeSet[KT, VT]:
 
 def to_list(
     tree: BinaryTreeSet[KT, VT]
-) -> List[Tuple[Optional[KT], Optional[VT]]]:
+) -> List[KT, VT]:
     if tree.is_empty():
         return []
     return (
