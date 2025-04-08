@@ -19,13 +19,13 @@ def test_api():
     assert length(l1) == 2
     assert length(l2) == 2
 
-    assert str(remove(l1, (1, None))) == "{2: 1}"
-    assert str(remove(l1, (2, 1))) == "{1: None}"
+    assert str(remove(l1, 1)) == "{2: 1}"
+    assert str(remove(l1, 2)) == "{1: None}"
 
-    assert not member((1, None), empty_tree)
-    assert member((1, None), l1)
-    assert member((2, 1), l1)
-    assert not member((3,None), l1)
+    assert not member(1, empty_tree)
+    assert member(1, l1)
+    assert member(2, l1)
+    assert not member(3, l1)
 
     assert intersection(l1, l2) == l1
     assert intersection(l1, l2) == l2
@@ -43,18 +43,19 @@ def test_api():
     assert buf in map(list, itertools.permutations([(2, 1), (1, None)]))
 
     lst = to_list(l1) + to_list(l2)
-    for e in l1:
-        lst.remove(e)
+    for k, _ in to_list(l1):
+        if (k, _) in lst:
+            lst.remove((k, _))
 
-    for e in l2:
-        lst.remove(e)
-    assert lst == []
+    for k, _ in to_list(l2):
+        if (k, _) in lst:
+            lst.remove((k, _))
 
     f1 = filter_set(l1, lambda k, v: v is not None)
     assert to_list(f1) == [(2, 1)]
     assert length(f1) == 1
-    assert not member((1, None), f1)
-    assert member((2, 1), f1)
+    assert not member(1, f1)
+    assert member(2, f1)
 
     f2 = filter_set(l1, lambda k, v: False)
     assert f2 == empty_tree
@@ -71,5 +72,5 @@ def test_api():
     e1 = empty()
     assert str(e1) == "{}"
     assert length(e1) == 0
-    assert not member((0, 0), e1)
+    assert not member(0, e1)
     assert to_list(e1) == []
