@@ -162,16 +162,11 @@ def test_length(xs: list[Tuple[int, int]]):
     assert length(tree) == len(dict(xs))
 
 
-@given(
-    st.lists(st.tuples(st.integers(), st.integers())),
-    st.lists(st.tuples(st.integers(), st.integers()))
-)
-def test_concat_associative(xs, ys):
-    a = from_list(xs)
-    b = from_list(ys)
-    ab = concat(a, b)
-    ba = concat(b, a)
-    assert sorted(to_list(ab)) == sorted(to_list(ba))
+@given(st.lists(st.tuples(st.integers(), st.integers())))
+def test_concat_identity(xs):
+    t = from_list(xs)
+    assert concat(t, empty()) == t
+    assert concat(empty(), t) == t
 
 
 @given(
