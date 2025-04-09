@@ -84,35 +84,40 @@ total = reduce_set(tree, lambda kv, acc: kv[1] + acc, 0)
 
 ## Difference Between Mutable and Immutable Data Structures
 
-The core distinction between **mutable** and **immutable** data structures lies in whether their content can be modified **after creation**. Below is a detailed comparison:
+The core distinction between **mutable** and **immutable** data structures
+lies in whether their content can be modified **after creation**.
+Below is a detailed comparison:
 
 ---
 
 ### **1. Immutable Data Structures**
 
-- **Definition**: Once created, their content (values or structure) **cannot be changed**.  
+- **Definition**: Once created, their content
+  (values or structure) **cannot be changed**.  
 - **Key Features**:  
-   - **Modifications create new objects**: Any "change" operation generates 
+   - **Modifications create new objects**:
+   Any "change" operation generates
    a new object, leaving the original unchanged.  
-   - **Thread-safe**: Naturally safe for concurrent access in multi-threaded environments 
+   - **Thread-safe**: Naturally safe for concurrent access in multi-threaded environments
    (no synchronization needed).  
-   - **Hashable**: Suitable as keys in hash tables (e.g., dictionary keys) 
+   - **Hashable**: Suitable as keys in hash tables (e.g., dictionary keys)
    due to fixed hash values.  
-   - **Memory optimization**: Interpreters/compilers may reuse memory 
+   - **Memory optimization**: Interpreters/compilers may reuse memory
    for common immutable objects (e.g., small integers, short strings).  
 
 ### **2. Mutable Data Structures**
 
-- **Definition**: Allow **in-place modifications** (e.g., add, remove, or update elements) after creation.  
+- **Definition**: Allow **in-place modifications**
+  (e.g., add, remove, or update elements) after creation.  
 
 - **Key Features**:  
-   - **In-place changes**: Operations modify the object directly 
+   - **In-place changes**: Operations modify the object directly
    without creating a new instance.  
-   - **Requires synchronization**: Thread safety must be manually enforced 
+   - **Requires synchronization**: Thread safety must be manually enforced
    (e.g., using locks).  
-   - **Non-hashable**: Generally cannot serve as hash keys 
+   - **Non-hashable**: Generally cannot serve as hash keys
    (hash value may change).  
-   - **High flexibility**: Ideal for scenarios requiring frequent modifications 
+   - **High flexibility**: Ideal for scenarios requiring frequent modifications
    (e.g., dynamic collections).
 
 ## Changelog
