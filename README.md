@@ -93,7 +93,7 @@ Below is a detailed comparison:
 ### **1. Immutable Data Structures**
 
 - **Definition**: Once created, their content
-(values or structure) **cannot be changed**.  
+ (values or structure) **cannot be changed**.
 
 - **Key Features**:
    - **Modifications create new objects**:
