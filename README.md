@@ -7,9 +7,9 @@ It supports core set operations and functional programming paradigms.
 ## Project Structure
 
 - `binary_tree_set.py` — Implementation of the `BinaryTreeSet` class with methods
-for insertion,deletion, membership checks, and functional operations.
+  for insertion,deletion, membership checks, and functional operations.
 - `test_binary_tree_set.py` — Comprehensive unit tests and property-based tests
-(PBT) for the BST implementation.
+  (PBT) for the BST implementation.
 
 ## Features
 
@@ -42,7 +42,8 @@ for insertion,deletion, membership checks, and functional operations.
   Create a new tree with elements satisfying the predicate `(key, value) -> bool`.
 
 - **`map_set(func)`**  
-  Apply a function `(key, value) -> (new_key, new_value)` to all elements, producing a transformed tree.
+  Apply a function `(key, value) -> (new_key, new_value)` to all elements,
+  producing a transformed tree.
 
 - **`reduce_set(func, initial)`**  
   Aggregate values using a reducer function `(key_value_pair, accumulator) -> new_accumulator`.
@@ -111,4 +112,5 @@ total = reduce_set(tree, lambda kv, acc: kv[1] + acc, 0)
 
 ---
 
-*Built with Python type hints. Compatible with Python 3.8+. Requires `hypothesis` for PBT.*
+*Built with Python type hints. Compatible with Python 3.8+.
+Requires `hypothesis` for PBT.*
