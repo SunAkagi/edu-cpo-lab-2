@@ -3,7 +3,7 @@ import itertools
 from binary_tree_set import concat, cons, from_list, \
     intersection, length, member, remove, to_list, empty, map_set, \
     filter_set, reduce_set
-from typing import Tuple
+from typing import Tuple, List
 from hypothesis import given, strategies as st
 
 
@@ -150,7 +150,7 @@ def test_reduce_set():
 
 
 @given(st.lists(st.tuples(st.integers(), st.text())))
-def test_roundtrip_list(xs: list[Tuple[int, str]]):
+def test_roundtrip_list(xs: List[Tuple[int, str]]) -> None:
     tree = from_list(xs)
     out = to_list(tree)
     d = dict(xs)
@@ -158,13 +158,13 @@ def test_roundtrip_list(xs: list[Tuple[int, str]]):
 
 
 @given(st.lists(st.tuples(st.integers(), st.integers())))
-def test_length(xs: list[Tuple[int, int]]):
+def test_length(xs: List[Tuple[int, int]]) -> None:
     tree = from_list(xs)
     assert length(tree) == len(dict(xs))
 
 
 @given(st.lists(st.tuples(st.integers(), st.integers())))
-def test_concat_identity(xs):
+def test_concat_identity(xs: List[Tuple[int, int]]) -> None:
     t = from_list(xs)
     assert concat(t, empty()) == t
     assert concat(empty(), t) == t
@@ -175,7 +175,11 @@ def test_concat_identity(xs):
     st.lists(st.tuples(st.integers(), st.integers())),
     st.lists(st.tuples(st.integers(), st.integers()))
 )
-def test_concat_associativity(xs, ys, zs):
+def test_concat_associativity(
+    xs: List[Tuple[int, int]],
+    ys: List[Tuple[int, int]],
+    zs: List[Tuple[int, int]]
+) -> None:
     a = from_list(xs)
     b = from_list(ys)
     c = from_list(zs)
@@ -185,7 +189,7 @@ def test_concat_associativity(xs, ys, zs):
 @given(
     st.lists(st.tuples(st.integers(), st.integers()))
 )
-def test_map_set_preserves_keys(xs):
+def test_map_set_preserves_keys(xs: List[Tuple[int, int]]) -> None:
     tree = from_list(xs)
     result = map_set(tree, lambda k, v: (k + 1, v))
     assert all(isinstance(k, int) for k, _ in to_list(result))
@@ -194,7 +198,7 @@ def test_map_set_preserves_keys(xs):
 @given(
     st.lists(st.tuples(st.integers(), st.integers()))
 )
-def test_filter_subset(xs):
+def test_filter_subset(xs: List[Tuple[int, int]]) -> None:
     def pred(k, v):
         return k % 2 == 0
 
@@ -206,7 +210,7 @@ def test_filter_subset(xs):
 @given(
     st.lists(st.tuples(st.integers(), st.integers()))
 )
-def test_remove_deletes(xs):
+def test_remove_deletes(xs: List[Tuple[int, int]]) -> None:
     tree = from_list(xs)
     for k, _ in xs:
         tree = remove(tree, k)
