@@ -1,8 +1,11 @@
 import itertools
 
-from binary_tree_set import concat, cons, from_list, \
+from binary_tree_set import concat, cons, from_list, BinaryTreeSet\
     intersection, length, member, remove, to_list, empty, map_set, \
     filter_set, reduce_set
+from typing import Tuple
+import pytest
+from hypothesis import given, strategies as st
 
 
 def test_api():
@@ -81,3 +84,131 @@ def test_api():
     assert length(e1) == 0
     assert not member(0, e1)
     assert to_list(e1) == []
+
+
+def test_empty():
+    t = empty()
+    assert t.is_empty()
+    assert to_list(t) == []
+
+
+def test_cons():
+    t = empty()
+    t = cons((1, 'a'), t)
+    assert to_list(t) == [(1, 'a')]
+
+
+def test_from_list_and_to_list():
+    lst = [(2, 'b'), (1, 'a'), (3, 'c')]
+    t = from_list(lst)
+    out = to_list(t)
+    assert sorted(out) == sorted(lst)
+
+
+def test_member():
+    t = from_list([(1, 'a'), (2, 'b')])
+    assert member(1, t) is True
+    assert member(3, t) is False
+
+
+def test_remove():
+    t = from_list([(1, 'a'), (2, 'b'), (3, 'c')])
+    t2 = remove(t, 2)
+    assert not member(2, t2)
+    assert sorted(to_list(t2)) == [(1, 'a'), (3, 'c')]
+
+
+def test_concat():
+    a = from_list([(1, 'a')])
+    b = from_list([(2, 'b')])
+    c = concat(a, b)
+    assert sorted(to_list(c)) == [(1, 'a'), (2, 'b')]
+
+
+def test_intersection():
+    a = from_list([(1, 'a'), (2, 'b')])
+    b = from_list([(2, 'B'), (3, 'c')])
+    i = intersection(a, b)
+    assert to_list(i) == [(2, 'b')]
+
+
+def test_map_set():
+    t = from_list([(1, 10), (2, 20)])
+    t2 = map_set(t, lambda k, v: (k * 2, v + 1))
+    assert sorted(to_list(t2)) == [(2, 11), (4, 21)]
+
+
+def test_filter_set():
+    t = from_list([(1, 10), (2, 20), (3, 30)])
+    t2 = filter_set(t, lambda k, v: k % 2 == 1)
+    assert sorted(to_list(t2)) == [(1, 10), (3, 30)]
+
+def test_reduce_set():
+    t = from_list([(1, 10), (2, 20), (3, 30)])
+    s = reduce_set(t, lambda kv, acc: kv[1] + acc, 0)
+    assert s == 60
+
+
+@given(st.lists(st.tuples(st.integers(), st.text())))
+def test_roundtrip_list(xs: list[Tuple[int, str]]):
+    tree = from_list(xs)
+    out = to_list(tree)
+    d = dict(xs)
+    assert dict(out) == d
+
+@given(st.lists(st.tuples(st.integers(), st.integers())))
+def test_length(xs: list[Tuple[int, int]]):
+    tree = from_list(xs)
+    assert length(tree) == len(dict(xs))
+
+
+@given(
+    st.lists(st.tuples(st.integers(), st.integers())),
+    st.lists(st.tuples(st.integers(), st.integers()))
+)
+def test_concat_associative(xs, ys):
+    a = from_list(xs)
+    b = from_list(ys)
+    ab = concat(a, b)
+    ba = concat(b, a)
+    assert sorted(to_list(ab)) == sorted(to_list(ba))
+
+
+@given(
+    st.lists(st.tuples(st.integers(), st.integers())),
+    st.lists(st.tuples(st.integers(), st.integers())),
+    st.lists(st.tuples(st.integers(), st.integers()))
+)
+def test_concat_associativity(xs, ys, zs):
+    a = from_list(xs)
+    b = from_list(ys)
+    c = from_list(zs)
+    assert concat(concat(a, b), c) == concat(a, concat(b, c))
+
+@given(
+    st.lists(st.tuples(st.integers(), st.integers()))
+)
+def test_map_set_preserves_keys(xs):
+    tree = from_list(xs)
+    result = map_set(tree, lambda k, v: (k + 1, v))
+    assert all(isinstance(k, int) for k, _ in to_list(result))
+
+
+@given(
+    st.lists(st.tuples(st.integers(), st.integers()))
+)
+def test_filter_subset(xs):
+    tree = from_list(xs)
+    pred = lambda k, v: k % 2 == 0
+    filtered = filter_set(tree, pred)
+    assert all(pred(k, v) for k, v in to_list(filtered))
+
+
+@given(
+    st.lists(st.tuples(st.integers(), st.integers()))
+)
+def test_remove_deletes(xs):
+    tree = from_list(xs)
+    for k, _ in xs:
+        tree = remove(tree, k)
+    assert to_list(tree) == []
