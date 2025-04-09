@@ -143,6 +143,7 @@ def test_filter_set():
     t2 = filter_set(t, lambda k, v: k % 2 == 1)
     assert sorted(to_list(t2)) == [(1, 10), (3, 30)]
 
+
 def test_reduce_set():
     t = from_list([(1, 10), (2, 20), (3, 30)])
     s = reduce_set(t, lambda kv, acc: kv[1] + acc, 0)
@@ -155,6 +156,7 @@ def test_roundtrip_list(xs: list[Tuple[int, str]]):
     out = to_list(tree)
     d = dict(xs)
     assert dict(out) == d
+
 
 @given(st.lists(st.tuples(st.integers(), st.integers())))
 def test_length(xs: list[Tuple[int, int]]):
@@ -180,6 +182,7 @@ def test_concat_associativity(xs, ys, zs):
     c = from_list(zs)
     assert concat(concat(a, b), c) == concat(a, concat(b, c))
 
+
 @given(
     st.lists(st.tuples(st.integers(), st.integers()))
 )
@@ -193,8 +196,10 @@ def test_map_set_preserves_keys(xs):
     st.lists(st.tuples(st.integers(), st.integers()))
 )
 def test_filter_subset(xs):
+    def pred(k, v):
+        return k % 2 == 0
+
     tree = from_list(xs)
-    pred = lambda k, v: k % 2 == 0
     filtered = filter_set(tree, pred)
     assert all(pred(k, v) for k, v in to_list(filtered))
 
