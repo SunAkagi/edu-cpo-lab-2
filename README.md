@@ -1,19 +1,24 @@
 # Kirov reporting！- lab 1 - variant 3 - Set based on binary tree
 
-This project implements a Set based on a binary search tree (BST) structure, demonstrating an immutable persistent data structure. It supports core set operations and functional programming paradigms.
+This project implements a Set based on a binary search tree (BST) structure,
+demonstrating an immutable persistent data structure.
+It supports core set operations and functional programming paradigms.
 
 ## Project Structure
 
-- `binary_tree_set.py` — Implementation of the `BinaryTreeSet` class with methods for insertion, deletion, membership checks, and functional operations.
-- `test_binary_tree_set.py` — Comprehensive unit tests and property-based tests (PBT) for the BST implementation.
+- `binary_tree_set.py` — Implementation of the `BinaryTreeSet` class with methods
+for insertion,deletion, membership checks, and functional operations.
+- `test_binary_tree_set.py` — Comprehensive unit tests and property-based tests
+(PBT) for the BST implementation.
 
 ## Features
 
 ### Core Functionality
 
 - **Insertion (`cons`)**  
-  Add key-value pairs while maintaining BST properties. Duplicate keys replace existing values.
-  
+  Add key-value pairs while maintaining BST properties.
+  Duplicate keys replace existing values.
+
 - **Deletion (`remove`)**  
   Remove elements by key. Automatically reorganizes the tree structure.
 
@@ -24,12 +29,12 @@ This project implements a Set based on a binary search tree (BST) structure, dem
   Get the number of elements in the tree.
 
 - **Conversion**  
-  - `from_list(lst)`: Build a tree from a list of key-value pairs.
-  - `to_list()`: Convert the tree to an ordered list.
+   - `from_list(lst)`: Build a tree from a list of key-value pairs.
+   - `to_list()`: Convert the tree to an ordered list.
 
 - **Set Operations**  
-  - `concat(tree1, tree2)`: Merge two trees.
-  - `intersection(tree1, tree2)`: Return a tree with common keys.
+   - `concat(tree1, tree2)`: Merge two trees.
+   - `intersection(tree1, tree2)`: Return a tree with common keys.
 
 ### Functional Operations
 
