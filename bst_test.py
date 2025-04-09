@@ -150,22 +150,22 @@ def test_reduce_set():
 
 
 @given(st.lists(st.tuples(st.integers(), st.text())))
-def test_roundtrip_list(xs: list[Tuple[int, str]]):
-    tree = from_list[int, str](xs)
-    out = to_list[int, str](tree)
+def test_roundtrip_list(xs):
+    tree = from_list(xs)
+    out = to_list(tree)
     d = dict(xs)
     assert dict(out) == d
 
 
 @given(st.lists(st.tuples(st.integers(), st.integers())))
-def test_length(xs: list[Tuple[int, int]]):
-    tree = from_list[int, int](xs)
+def test_length(xs):
+    tree = from_list(xs)
     assert length(tree) == len(dict(xs))
 
 
 @given(st.lists(st.tuples(st.integers(), st.integers())))
 def test_concat_identity(xs):
-    t = from_list[int, int](xs)
+    t = from_list(xs)
     assert concat(t, empty()) == t
     assert concat(empty(), t) == t
 
@@ -176,9 +176,9 @@ def test_concat_identity(xs):
     st.lists(st.tuples(st.integers(), st.integers()))
 )
 def test_concat_associativity(xs, ys, zs):
-    a = from_list[int, int](xs)
-    b = from_list[int, int](ys)
-    c = from_list[int, int](zs)
+    a = from_list(xs)
+    b = from_list(ys)
+    c = from_list(zs)
     assert concat(concat(a, b), c) == concat(a, concat(b, c))
 
 
@@ -186,7 +186,7 @@ def test_concat_associativity(xs, ys, zs):
     st.lists(st.tuples(st.integers(), st.integers()))
 )
 def test_map_set_preserves_keys(xs):
-    tree = from_list[int, int](xs)
+    tree = from_list(xs)
     result = map_set(tree, lambda k, v: (k + 1, v))
     assert all(isinstance(k, int) for k, _ in to_list(result))
 
@@ -198,7 +198,7 @@ def test_filter_subset(xs):
     def pred(k, v):
         return k % 2 == 0
 
-    tree = from_list[int, int](xs)
+    tree = from_list(xs)
     filtered = filter_set(tree, pred)
     assert all(pred(k, v) for k, v in to_list(filtered))
 
@@ -207,7 +207,7 @@ def test_filter_subset(xs):
     st.lists(st.tuples(st.integers(), st.integers()))
 )
 def test_remove_deletes(xs):
-    tree = from_list[int, int](xs)
+    tree = from_list(xs)
     for k, _ in xs:
         tree = remove(tree, k)
     assert to_list(tree) == []
