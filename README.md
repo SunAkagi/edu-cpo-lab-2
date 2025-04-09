@@ -88,7 +88,6 @@ The core distinction between **mutable** and **immutable** data structures
 lies in whether their content can be modified **after creation**.
 Below is a detailed comparison:
 
-
 ### **1. Immutable Data Structures**
 
 - **Definition**: Once created, their content
