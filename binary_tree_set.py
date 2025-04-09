@@ -1,13 +1,17 @@
-from typing import Generic, Optional, TypeVar, Callable, List, Tuple, Protocol, Any
+from typing import Generic, Optional, TypeVar, Callable, \
+    List, Tuple, Protocol, Any
 from functools import reduce as functools_reduce
+
 
 class SupportsLessThan(Protocol):
     def __lt__(self, other: Any) -> bool: ...
+
 
 KT = TypeVar("KT", bound=SupportsLessThan)
 VT = TypeVar("VT")
 KT2 = TypeVar("KT2", bound=SupportsLessThan)
 VT2 = TypeVar("VT2")
+
 
 class BinaryTreeSet(Generic[KT, VT]):
     def is_empty(self) -> bool:
@@ -17,12 +21,16 @@ class BinaryTreeSet(Generic[KT, VT]):
         raise NotImplementedError
 
     def __eq__(self, other):
-        return isinstance(other, BinaryTreeSet) and dict(to_list(self)) == dict(to_list(other))
+        return (
+            isinstance(other, BinaryTreeSet) and
+            dict(to_list(self)) == dict(to_list(other))
+        )
 
     def __str__(self):
         if self.is_empty():
             return "{}"
         return "{" + ", ".join(f"{k}: {v}" for k, v in self) + "}"
+
 
 class EmptyTree(BinaryTreeSet[KT, VT]):
     def is_empty(self) -> bool:
@@ -31,6 +39,7 @@ class EmptyTree(BinaryTreeSet[KT, VT]):
     def __iter__(self):
         return
         yield
+
 
 class Node(BinaryTreeSet[KT, VT]):
     def __init__(
@@ -55,10 +64,15 @@ class Node(BinaryTreeSet[KT, VT]):
         if not self.right.is_empty():
             yield from self.right
 
+
 def empty() -> BinaryTreeSet[KT, VT]:
     return EmptyTree()
 
-def cons(pair: Tuple[KT, VT], tree: BinaryTreeSet[KT, VT]) -> BinaryTreeSet[KT, VT]:
+
+def cons(
+    pair: Tuple[KT, VT],
+    tree: BinaryTreeSet[KT, VT]
+) -> BinaryTreeSet[KT, VT]:
     k, v = pair
     if tree.is_empty():
         return Node(k, v)
@@ -70,14 +84,17 @@ def cons(pair: Tuple[KT, VT], tree: BinaryTreeSet[KT, VT]) -> BinaryTreeSet[KT, 
     else:
         return Node(tree.key, tree.value, tree.left, cons((k, v), tree.right))
 
+
 def from_list(pairs: List[Tuple[KT, VT]]) -> BinaryTreeSet[KT, VT]:
     tree: BinaryTreeSet[KT, VT] = empty()
     for k, v in pairs:
         tree = cons((k, v), tree)
     return tree
 
+
 def to_list(tree: BinaryTreeSet[KT, VT]) -> List[Tuple[KT, VT]]:
     return list(tree)
+
 
 def member(k: KT, tree: BinaryTreeSet[KT, VT]) -> bool:
     if tree.is_empty():
@@ -90,8 +107,10 @@ def member(k: KT, tree: BinaryTreeSet[KT, VT]) -> bool:
     else:
         return member(k, tree.right)
 
+
 def length(tree: BinaryTreeSet[KT, VT]) -> int:
     return len(to_list(tree))
+
 
 def remove(tree: BinaryTreeSet[KT, VT], k: KT) -> BinaryTreeSet[KT, VT]:
     if tree.is_empty():
@@ -104,22 +123,50 @@ def remove(tree: BinaryTreeSet[KT, VT], k: KT) -> BinaryTreeSet[KT, VT]:
     else:
         if not tree.left.is_empty():
             max_kv = to_list(tree.left)[-1]
-            return Node(max_kv[0], max_kv[1], remove(tree.left, max_kv[0]), tree.right)
+            return Node(
+                max_kv[0],
+                max_kv[1],
+                remove(tree.left, max_kv[0]), tree.right
+            )
         else:
             return tree.right
 
-def concat(a: BinaryTreeSet[KT, VT], b: BinaryTreeSet[KT, VT]) -> BinaryTreeSet[KT, VT]:
+
+def concat(
+    a: BinaryTreeSet[KT, VT],
+    b: BinaryTreeSet[KT, VT]
+) -> BinaryTreeSet[KT, VT]:
     return from_list(to_list(a) + to_list(b))
 
-def intersection(a: BinaryTreeSet[KT, VT], b: BinaryTreeSet[KT, VT]) -> BinaryTreeSet[KT, VT]:
+
+def intersection(
+    a: BinaryTreeSet[KT, VT],
+    b: BinaryTreeSet[KT, VT]
+) -> BinaryTreeSet[KT, VT]:
     return from_list([(k, v) for (k, v) in to_list(a) if member(k, b)])
 
-def map_set(tree: BinaryTreeSet[KT, VT], f: Callable[[KT, VT], Tuple[KT2, VT2]]) -> BinaryTreeSet[KT2, VT2]:
+
+def map_set(
+    tree: BinaryTreeSet[KT, VT],
+    f: Callable[[KT, VT], Tuple[KT2, VT2]]
+) -> BinaryTreeSet[KT2, VT2]:
     return from_list([f(k, v) for (k, v) in to_list(tree)])
 
-def filter_set(tree: BinaryTreeSet[KT, VT], predicate: Callable[[KT, VT], bool]) -> BinaryTreeSet[KT, VT]:
+
+def filter_set(
+    tree: BinaryTreeSet[KT, VT],
+    predicate: Callable[[KT, VT], bool]
+) -> BinaryTreeSet[KT, VT]:
     return from_list([(k, v) for (k, v) in to_list(tree) if predicate(k, v)])
 
-def reduce_set(tree: BinaryTreeSet[KT, VT], func: Callable[[Tuple[KT, VT], VT2], VT2], initializer: VT2) -> VT2:
-    return functools_reduce(lambda acc, kv: func(kv, acc), to_list(tree), initializer)
-    
+
+def reduce_set(
+    tree: BinaryTreeSet[KT, VT],
+    func: Callable[[Tuple[KT, VT], VT2], VT2],
+    initializer: VT2
+) -> VT2:
+    return functools_reduce(
+        lambda acc, kv: func(kv, acc),
+        to_list(tree),
+        initializer
+    )
