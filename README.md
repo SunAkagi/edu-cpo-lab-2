@@ -1,4 +1,4 @@
-# Kirov reporting！- lab 1 - variant 3 - Set based on binary tree
+# Kirov reporting！- lab 2 - variant 3 - Set based on binary tree
 
 This project implements a Set based on a binary search tree (BST) structure,
 demonstrating an immutable persistent data structure.
