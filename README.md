@@ -93,17 +93,18 @@ Below is a detailed comparison:
 ### **1. Immutable Data Structures**
 
 - **Definition**: Once created, their content
-  (values or structure) **cannot be changed**.  
-- **Key Features**:  
+(values or structure) **cannot be changed**.  
+- **Key Features**:
    - **Modifications create new objects**:
    Any "change" operation generates
-   a new object, leaving the original unchanged.  
+   a new object, leaving the original unchanged.
    - **Thread-safe**: Naturally safe for concurrent access in multi-threaded environments
-   (no synchronization needed).  
+   (no synchronization needed).
    - **Hashable**: Suitable as keys in hash tables (e.g., dictionary keys)
-   due to fixed hash values.  
+   due to fixed hash values.
    - **Memory optimization**: Interpreters/compilers may reuse memory
-   for common immutable objects (e.g., small integers, short strings).  
+   for common immutable objects
+   (e.g., small integers, short strings).
 
 ### **2. Mutable Data Structures**
 
@@ -112,11 +113,11 @@ Below is a detailed comparison:
 
 - **Key Features**:  
    - **In-place changes**: Operations modify the object directly
-   without creating a new instance.  
+   without creating a new instance.
    - **Requires synchronization**: Thread safety must be manually enforced
-   (e.g., using locks).  
+   (e.g., using locks).
    - **Non-hashable**: Generally cannot serve as hash keys
-   (hash value may change).  
+   (hash value may change).
    - **High flexibility**: Ideal for scenarios requiring frequent modifications
    (e.g., dynamic collections).
 
