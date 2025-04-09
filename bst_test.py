@@ -1,6 +1,6 @@
 import itertools
 
-from binary_tree_set import concat, cons, from_list, BinaryTreeSet\
+from binary_tree_set import concat, cons, from_list, BinaryTreeSet, \
     intersection, length, member, remove, to_list, empty, map_set, \
     filter_set, reduce_set
 from typing import Tuple
