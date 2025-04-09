@@ -88,7 +88,6 @@ The core distinction between **mutable** and **immutable** data structures
 lies in whether their content can be modified **after creation**.
 Below is a detailed comparison:
 
----
 
 ### **1. Immutable Data Structures**
 
@@ -151,6 +150,3 @@ Below is a detailed comparison:
 - Test Development: `Yang Liang (<2663048219@qq.com>)`  
 
 ---
-
-*Built with Python type hints. Compatible with Python 3.8+.
-Requires `hypothesis` for PBT.*
