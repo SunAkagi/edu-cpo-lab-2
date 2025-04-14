@@ -35,7 +35,7 @@ def test_api():
     assert intersection(
         l1,
         cons((1, 2), empty_tree)
-    ) == intersection((1, 2), empty_tree)
+    ) == intersection(cons((1, 2), empty_tree), l1)
 
     assert (
         to_list(l1) == [(1, 2), (2, 1)] or
