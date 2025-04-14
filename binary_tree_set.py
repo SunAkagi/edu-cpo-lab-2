@@ -112,7 +112,7 @@ def member(k: KT, tree: BinaryTreeSet[KT, VT]) -> bool:
 
 
 def length(tree: BinaryTreeSet[KT, VT]) -> int:
-    return len(to_list(tree))
+    return sum(1 for _ in tree)
 
 
 def remove(tree: BinaryTreeSet[KT, VT], k: KT) -> BinaryTreeSet[KT, VT]:
@@ -146,21 +146,28 @@ def intersection(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
 ) -> BinaryTreeSet[KT, VT]:
-    return from_list([(k, v) for (k, v) in to_list(a) if member(k, b)])
+    return [(k, v) for k, v in a if member(k, b)]
 
 
 def map_set(
     tree: BinaryTreeSet[KT, VT],
     f: Callable[[KT, VT], Tuple[KT2, VT2]]
 ) -> BinaryTreeSet[KT2, VT2]:
-    return from_list([f(k, v) for (k, v) in to_list(tree)])
+    result = EmptyTree()
+    for k, v in tree:
+        new_k, new_v = f(k, v)
+        result = cons((new_k, new_v), result)
+    return result
 
 
 def filter_set(
     tree: BinaryTreeSet[KT, VT],
     predicate: Callable[[KT, VT], bool]
 ) -> BinaryTreeSet[KT, VT]:
-    return from_list([(k, v) for (k, v) in to_list(tree) if predicate(k, v)])
+    for k, v in tree:
+        if predicate(k, v):
+            result = cons((k, v), result)
+    return result
 
 
 def reduce_set(
