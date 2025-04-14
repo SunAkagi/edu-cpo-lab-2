@@ -144,7 +144,7 @@ def concat(
             return acc
         assert isinstance(tree, Node)
         acc = inorder_insert(tree.left, acc)
-        acc = cons((tree.key, tree.value), acc)
+        acc = cons(acc, (tree.key, tree.value))
         return inorder_insert(tree.right, acc)
     
     return inorder_insert(b, a)
