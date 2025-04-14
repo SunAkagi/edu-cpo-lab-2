@@ -139,7 +139,12 @@ def concat(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
 ) -> BinaryTreeSet[KT, VT]:
-    return from_list(to_list(a) + to_list(b))
+    if b.is_empty():
+        return a
+    assert isinstance(b, Node)
+    left_combined = concat(a, b.left)
+    with_current = cons((b.key, b.value), left_combined)
+    return concat(with_current, b.right)
 
 
 def intersection(
