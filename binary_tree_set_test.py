@@ -180,6 +180,8 @@ def test_concat_associativity(xs, ys, zs):
     c = from_list(zs)
     ab_c = concat(concat(a, b), c)
     a_bc = concat(a, concat(b, c))
+    print("inorder(concat(concat(a, b), c)) =", inorder(concat(concat(a, b), c)))
+    print("inorder(concat(a, concat(b, c))) =", inorder(concat(a, concat(b, c))))
     assert tree_equal_structure(ab_c, a_bc)
 
 
