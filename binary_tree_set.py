@@ -199,4 +199,3 @@ def tree_equal_structure(
         tree_equal_structure(a.left, b.left) and
         tree_equal_structure(a.right, b.right)
     )
-
