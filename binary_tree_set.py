@@ -179,6 +179,16 @@ def filter_set(
     return result
 
 
+def print_tree(tree: BinaryTreeSet[KT, VT], indent=0):
+    if tree.is_empty():
+        print("  " * indent + "∅")
+        return
+    assert isinstance(tree, Node)
+    print_tree(tree.right, indent + 1)
+    print("  " * indent + f"({tree.key}, {tree.value})")
+    print_tree(tree.left, indent + 1)
+
+
 def reduce_set(
     tree: BinaryTreeSet[KT, VT],
     func: Callable[[Tuple[KT, VT], VT2], VT2],
