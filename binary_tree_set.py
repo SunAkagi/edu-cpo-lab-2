@@ -181,3 +181,22 @@ def reduce_set(
         to_list(tree),
         initializer
     )
+
+
+def tree_equal_structure(
+    a: BinaryTreeSet[KT, VT],
+    b: BinaryTreeSet[KT, VT]
+) -> bool:
+    if a.is_empty() and b.is_empty():
+        return True
+    if a.is_empty() or b.is_empty():
+        return False
+
+    assert isinstance(a, Node) and isinstance(b, Node)
+    return (
+        a.key == b.key and
+        a.value == b.value and
+        tree_equal_structure(a.left, b.left) and
+        tree_equal_structure(a.right, b.right)
+    )
+
