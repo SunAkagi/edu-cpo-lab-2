@@ -139,12 +139,15 @@ def concat(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
 ) -> BinaryTreeSet[KT, VT]:
-    if b.is_empty():
-        return a
-    assert isinstance(b, Node)
-    left_combined = concat(a, b.left)
-    with_current = cons((b.key, b.value), left_combined)
-    return concat(with_current, b.right)
+    def inorder_insert(tree: BinaryTreeSet[KT, VT], acc: BinaryTreeSet[KT, VT]) -> BinaryTreeSet[KT, VT]:
+        if tree.is_empty():
+            return acc
+        assert isinstance(tree, Node)
+        acc = inorder_insert(tree.left, acc)
+        acc = cons((tree.key, tree.value), acc)
+        return inorder_insert(tree.right, acc)
+    
+    return inorder_insert(b, a)
 
 
 def intersection(
