@@ -178,9 +178,9 @@ def test_concat_associativity(xs, ys, zs):
     a = from_list(xs)
     b = from_list(ys)
     c = from_list(zs)
-    assert tree_equal_structure(
-        concat(concat(a, b), c), concat(a, concat(b, c))
-    )
+    ab_c = concat(concat(a, b), c)
+    a_bc = concat(a, concat(b, c))
+    assert tree_equal_structure(ab_c, a_bc)
 
 
 @given(
