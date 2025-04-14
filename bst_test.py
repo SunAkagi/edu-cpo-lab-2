@@ -29,8 +29,8 @@ def test_api():
     assert member(2, l1)
     assert not member(3, l1)
 
-    assert intersection(l1, l2) == ((1, 2),(2,1)) or intersection(l1, l2) == ((2, 1),(1,2))
-    assert intersection(l1, l2) == l2  or intersection(l1, l2) == ((2, 1),(1,2))
+    assert intersection(l1, l2) == to_list(l1)
+    assert intersection(l1, l2) == to_list(l2)
     assert intersection(l1, empty_tree) == ()
     assert intersection(
         l1,
