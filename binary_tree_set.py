@@ -164,6 +164,7 @@ def filter_set(
     tree: BinaryTreeSet[KT, VT],
     predicate: Callable[[KT, VT], bool]
 ) -> BinaryTreeSet[KT, VT]:
+    result = EmptyTree()
     for k, v in tree:
         if predicate(k, v):
             result = cons((k, v), result)
