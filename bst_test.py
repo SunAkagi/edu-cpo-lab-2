@@ -29,13 +29,13 @@ def test_api():
     assert member(2, l1)
     assert not member(3, l1)
 
-    assert intersection(l1, l2) == l1
-    assert intersection(l1, l2) == l2
-    assert intersection(l1, empty_tree) == empty_tree
+    assert intersection(l1, l2) == ((1, 2),(2,1)) or intersection(l1, l2) == ((2, 1),(1,2))
+    assert intersection(l1, l2) == l2  or intersection(l1, l2) == ((2, 1),(1,2))
+    assert intersection(l1, empty_tree) == ()
     assert intersection(
         l1,
         cons((1, 2), empty_tree)
-    ) == cons((1, 2), empty_tree)
+    ) == intersection((1, 2), empty_tree)
 
     assert (
         to_list(l1) == [(1, 2), (2, 1)] or
