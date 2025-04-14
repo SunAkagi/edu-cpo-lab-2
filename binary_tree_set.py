@@ -146,7 +146,10 @@ def concat(
         acc = inorder_insert(tree.left, acc)
         acc = cons(acc, (tree.key, tree.value))
         return inorder_insert(tree.right, acc)
-    
+    if a.is_empty():
+        return b
+    if b.is_empty():
+        return a
     return inorder_insert(b, a)
 
 
