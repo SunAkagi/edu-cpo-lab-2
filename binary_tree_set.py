@@ -144,7 +144,7 @@ def concat(
             return acc
         assert isinstance(tree, Node)
         acc = inorder_insert(tree.left, acc)
-        acc = cons(acc, (tree.key, tree.value))
+        acc = cons((tree.key, tree.value),acc)
         return inorder_insert(tree.right, acc)
     if a.is_empty():
         return b
@@ -156,7 +156,7 @@ def concat(
 def intersection(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
-) -> BinaryTreeSet[KT, VT]:
+) -> List[Tuple[KT, VT]]:
     return [(k, v) for k, v in a if member(k, b)]
 
 
