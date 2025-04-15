@@ -8,7 +8,7 @@ from typing import List, Tuple
 
 
 def test_api() -> None:
-    empty_tree = empty()
+    empty_treeempty_tree: BinaryTreeSet[int, str] = empty()
     assert str(cons((1, 2), empty_tree)) == "{1: 2}"
     l1 = cons((1, 2), cons((2, 1), empty_tree))
     l2 = cons((2, 1), cons((1, 2), empty_tree))
