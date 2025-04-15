@@ -154,7 +154,7 @@ def map_set(
     tree: BinaryTreeSet[KT, VT],
     f: Callable[[KT, VT], Tuple[KT2, VT2]]
 ) -> BinaryTreeSet[KT2, VT2]:
-    result = EmptyTree()
+    result: BinaryTreeSet[KT2, VT2] = empty()
     for k, v in tree:
         new_k, new_v = f(k, v)
         result = cons((new_k, new_v), result)
@@ -165,7 +165,7 @@ def filter_set(
     tree: BinaryTreeSet[KT, VT],
     predicate: Callable[[KT, VT], bool]
 ) -> BinaryTreeSet[KT, VT]:
-    result = EmptyTree()
+    result: BinaryTreeSet[KT2, VT2] = empty()
     for k, v in tree:
         if predicate(k, v):
             result = cons((k, v), result)
