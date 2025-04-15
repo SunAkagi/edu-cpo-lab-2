@@ -2,7 +2,7 @@ import itertools
 
 from binary_tree_set import concat, cons, from_list, \
     intersection, length, member, remove, to_list, empty, map_set, \
-    filter_set, reduce_set, tree_equal_structure, print_tree
+    filter_set, reduce_set, tree_equal_structure
 from hypothesis import given, strategies as st
 
 
@@ -180,13 +180,6 @@ def test_concat_associativity(xs, ys, zs):
     c = from_list(zs)
     ab_c = concat(concat(a, b), c)
     a_bc = concat(a, concat(b, c))
-    print("xs =", xs)
-    print("ys =", ys)
-    print("zs =", zs)
-    print("Tree structure of concat(concat(a, b), c):")
-    print_tree(concat(concat(a, b), c))
-    print("Tree structure of concat(a, concat(b, c)):")
-    print_tree(concat(a, concat(b, c)))
     assert tree_equal_structure(ab_c, a_bc)
 
 
