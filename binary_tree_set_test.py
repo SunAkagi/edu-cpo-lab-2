@@ -207,7 +207,7 @@ def test_filter_subset(xs):
 @given(
     st.lists(st.tuples(st.integers(), st.integers()))
 )
-def test_remove_deletes(xs]):
+def test_remove_deletes(xs):
     tree = from_list(xs)
     for k, _ in xs:
         tree = remove(tree, k)
