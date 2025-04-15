@@ -3,6 +3,7 @@ from typing import Generic, Optional, TypeVar, Callable, \
 from functools import reduce as functools_reduce
 
 
+@runtime_checkable
 class SupportsLessThan(Protocol):
     def __lt__(self, other: object) -> bool: ...
 
