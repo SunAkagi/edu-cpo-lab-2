@@ -90,7 +90,7 @@ def cons(
 
 def from_list(pairs: List[Tuple[KT, VT]]) -> BinaryTreeSet[KT, VT]:
     tree: BinaryTreeSet[KT, VT] = empty()
-    for k, v in sorted(pairs):
+    for k, v in pairs:
         tree = cons((k, v), tree)
     return tree
 
