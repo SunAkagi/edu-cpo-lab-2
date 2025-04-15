@@ -1,5 +1,5 @@
 from typing import Generic, Optional, TypeVar, Callable, \
-    List, Tuple, Protocol, Iterator
+    List, Tuple, Protocol, Iterator, runtime_checkable
 from functools import reduce as functools_reduce
 
 
