@@ -139,10 +139,8 @@ def concat(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
 ) -> BinaryTreeSet[KT, VT]:
-    result = a
-    for pair in to_list(b):
-        result = cons(pair, result)
-    return result
+    all_pairs = to_list(self) + to_list(other)
+    return from_list(all_pairs)
 
 
 
