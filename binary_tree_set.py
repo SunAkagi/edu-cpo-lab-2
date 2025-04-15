@@ -143,7 +143,6 @@ def concat(
     return from_list(all_pairs)
 
 
-
 def intersection(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
@@ -171,16 +170,6 @@ def filter_set(
         if predicate(k, v):
             result = cons((k, v), result)
     return result
-
-
-def print_tree(tree: BinaryTreeSet[KT, VT], indent=0):
-    if tree.is_empty():
-        print("  " * indent + "∅")
-        return
-    assert isinstance(tree, Node)
-    print_tree(tree.right, indent + 1)
-    print("  " * indent + f"({tree.key}, {tree.value})")
-    print_tree(tree.left, indent + 1)
 
 
 def reduce_set(
