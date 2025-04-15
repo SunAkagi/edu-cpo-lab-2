@@ -175,7 +175,11 @@ def test_concat_identity(xs: List[Tuple[int, int]]) -> None:
     st.lists(st.tuples(st.integers(), st.integers())),
     st.lists(st.tuples(st.integers(), st.integers()))
 )
-def test_concat_associativity(xs: List[Tuple[int, int]], ys: List[Tuple[int, int]], zs: List[Tuple[int, int]]) -> None:
+def test_concat_associativity(
+    xs: List[Tuple[int, int]],
+    ys: List[Tuple[int, int]],
+    zs: List[Tuple[int, int]]
+) -> None:
     a = from_list(xs)
     b = from_list(ys)
     c = from_list(zs)
