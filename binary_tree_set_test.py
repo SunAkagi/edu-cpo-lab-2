@@ -6,7 +6,7 @@ from binary_tree_set import concat, cons, from_list, \
 from hypothesis import given, strategies as st
 
 
-def test_api():
+def test_api() -> None:
     empty_tree = empty()
     assert str(cons((1, 2), empty_tree)) == "{1: 2}"
     l1 = cons((1, 2), cons((2, 1), empty_tree))
@@ -84,65 +84,65 @@ def test_api():
     assert to_list(e1) == []
 
 
-def test_empty():
+def test_empty() -> None:
     t = empty()
     assert t.is_empty()
     assert to_list(t) == []
 
 
-def test_cons():
+def test_cons() -> None:
     t = empty()
     t = cons((1, 'a'), t)
     assert to_list(t) == [(1, 'a')]
 
 
-def test_from_list_and_to_list():
+def test_from_list_and_to_list() -> None:
     lst = [(2, 'b'), (1, 'a'), (3, 'c')]
     t = from_list(lst)
     out = to_list(t)
     assert sorted(out) == sorted(lst)
 
 
-def test_member():
+def test_member() -> None:
     t = from_list([(1, 'a'), (2, 'b')])
     assert member(1, t) is True
     assert member(3, t) is False
 
 
-def test_remove():
+def test_remove() -> None:
     t = from_list([(1, 'a'), (2, 'b'), (3, 'c')])
     t2 = remove(t, 2)
     assert not member(2, t2)
     assert sorted(to_list(t2)) == [(1, 'a'), (3, 'c')]
 
 
-def test_concat():
+def test_concat() -> None:
     a = from_list([(1, 'a')])
     b = from_list([(2, 'b')])
     c = concat(a, b)
     assert sorted(to_list(c)) == [(1, 'a'), (2, 'b')]
 
 
-def test_intersection():
+def test_intersection() -> None:
     a = from_list([(1, 'a'), (2, 'b')])
     b = from_list([(2, 'B'), (3, 'c')])
     i = intersection(a, b)
     assert to_list(i) == [(2, 'b')]
 
 
-def test_map_set():
+def test_map_set() -> None:
     t = from_list([(1, 10), (2, 20)])
     t2 = map_set(t, lambda k, v: (k * 2, v + 1))
     assert sorted(to_list(t2)) == [(2, 11), (4, 21)]
 
 
-def test_filter_set():
+def test_filter_set() -> None:
     t = from_list([(1, 10), (2, 20), (3, 30)])
     t2 = filter_set(t, lambda k, v: k % 2 == 1)
     assert sorted(to_list(t2)) == [(1, 10), (3, 30)]
 
 
-def test_reduce_set():
+def test_reduce_set() -> None:
     t = from_list([(1, 10), (2, 20), (3, 30)])
     s = reduce_set(t, lambda kv, acc: kv[1] + acc, 0)
     assert s == 60
