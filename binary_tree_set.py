@@ -140,8 +140,12 @@ def concat(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
 ) -> BinaryTreeSet[KT, VT]:
-    all_pairs = sorted(to_list(a) + to_list(b))
-    return from_list(all_pairs)
+    result = empty()
+    for k, v in a:
+        result = cons((k, v), result)
+    for k, v in b:
+        result = cons((k, v), result)
+    return result
 
 
 def intersection(
