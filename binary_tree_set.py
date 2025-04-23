@@ -145,7 +145,7 @@ def concat(
     a: BinaryTreeSet[KT, VT],
     b: BinaryTreeSet[KT, VT]
 ) -> BinaryTreeSet[KT, VT]:
-    result = empty()
+    result: BinaryTreeSet[KT, VT] = empty()
     for k, v in a:
         result = cons((k, v), result)
     for k, v in b:
