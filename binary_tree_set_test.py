@@ -180,7 +180,7 @@ def test_concat_associativity(xs, ys, zs):
     c = from_list(zs)
     ab_c = concat(concat(a, b), c)
     a_bc = concat(a, concat(b, c))
-    assert ab_c == _bc)
+    assert ab_c == a_bc
 
 
 @given(
