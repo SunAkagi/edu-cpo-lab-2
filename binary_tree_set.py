@@ -19,11 +19,12 @@ class BinaryTreeSet(Generic[KT, VT]):
         raise NotImplementedError
 
     def __iter__(self) -> Iterator[Tuple[KT, VT]]:
-        if not self.left.is_empty():
-            yield from self.left
-        yield (self.key, self.value)
-        if not self.right.is_empty():
-            yield from self.right
+        if isinstance(self, Node):
+            if not self.left.is_empty():
+                yield from self.left
+            yield (self.key, self.value)
+            if not self.right.is_empty():
+                yield from self.right
 
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, BinaryTreeSet):
