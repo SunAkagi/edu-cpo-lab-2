@@ -1,8 +1,9 @@
 import itertools
 
-from binary_tree_set import concat, cons, from_list, \
+from binary_tree_set BinaryTreeSet, import concat, cons, from_list, \
     intersection, length, member, remove, to_list, empty, map_set, \
     filter_set, reduce_set
+from typing import Optional
 from hypothesis import given, strategies as st
 
 
