@@ -63,7 +63,6 @@ class BinaryTreeSet(Generic[KT, VT]):
 
         return True
 
-
     def __str__(self) -> str:
         if self.is_empty():
             return "{}"
