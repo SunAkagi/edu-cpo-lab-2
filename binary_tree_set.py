@@ -29,7 +29,7 @@ class BinaryTreeSet(Generic[KT, VT]):
     def __eq__(self, other: object) -> bool:
         if not isinstance(other, BinaryTreeSet):
             return False
-    
+
         def inorder_gen(node: BinaryTreeSet[KT, VT]):
             stack: List[BinaryTreeSet[KT, VT]] = []
             while stack or not node.is_empty():
@@ -40,27 +40,27 @@ class BinaryTreeSet(Generic[KT, VT]):
                 node = stack.pop()
                 yield (node.key, node.value)
                 node = node.right
-    
+
         gen1 = inorder_gen(self)
         gen2 = inorder_gen(other)
-    
+
         for pair1, pair2 in zip(gen1, gen2):
             if pair1 != pair2:
                 return False
-    
+
         # Check if both trees had the same number of nodes
         try:
             next(gen1)
             return False
         except StopIteration:
             pass
-    
+
         try:
             next(gen2)
             return False
         except StopIteration:
             pass
-    
+
         return True
 
 
