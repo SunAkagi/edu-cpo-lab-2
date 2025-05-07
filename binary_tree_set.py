@@ -31,7 +31,7 @@ class BinaryTreeSet(Generic[KT, VT]):
             return False
 
         def inorder_gen(node: BinaryTreeSet[KT, VT]):
-            stack: List[BinaryTreeSet[KT, VT]] = []
+            stack: List[Node[KT, VT]] = []
             while stack or not node.is_empty():
                 while not node.is_empty():
                     assert isinstance(node, Node)
